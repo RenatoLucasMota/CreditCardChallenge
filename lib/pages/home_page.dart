@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
                                   .currentIndex !=
                               -1
                           ? NeverScrollableScrollPhysics()
-                          : ClampingScrollPhysics(),
+                          : BouncingScrollPhysics(),
                   onPageChanged: (index) {
                     Provider.of<PageControllerApp>(context, listen: false)
                         .setPageIndex(index);
