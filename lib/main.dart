@@ -17,12 +17,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Credit Card Challenge',
-      theme: ThemeData(
-        brightness: Brightness.dark,
-      ),
+      theme: ThemeData.dark(),
       home: ChangeNotifierProvider(
+        create: (_) => PageControllerApp(),
         child: HomePage(),
-        create: (BuildContext context) => PageControllerApp(),
       ),
     );
   }

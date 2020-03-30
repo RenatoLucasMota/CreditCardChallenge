@@ -21,7 +21,7 @@ class ItemPage extends StatelessWidget {
     Track('opacity')
         .add(Duration(milliseconds: 300), Tween(begin: 1.0, end: 0.0)),
     Track('padding_right')
-        .add(Duration(milliseconds: 300), Tween(begin: 0.0, end: 20))
+        .add(Duration(milliseconds: 300), Tween(begin: 0.0, end: 20)),
   ]);
 
   final MultiTrackTween animacaoCard = MultiTrackTween([
@@ -30,7 +30,10 @@ class ItemPage extends StatelessWidget {
     Track('top').add(Duration(milliseconds: 300), Tween(begin: 0.20, end: 0.05),
         curve: Curves.easeInCubic),
     Track('scale').add(Duration(milliseconds: 300), Tween(begin: 1.0, end: 0.7),
-        curve: Curves.easeInCubic)
+        curve: Curves.easeInCubic),
+    Track('new_scale').add(
+        Duration(milliseconds: 300), Tween(begin: 1.0, end: 0.0),
+        curve: Curves.easeInCubic),
   ]);
 
   ItemPage(
@@ -46,7 +49,7 @@ class ItemPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         int currentIndex =
             Provider.of<PageControllerApp>(context, listen: false).currentIndex;
         if (currentIndex != -1) {
@@ -56,6 +59,8 @@ class ItemPage extends StatelessWidget {
         } else {
           Provider.of<PageControllerApp>(context, listen: false)
               .setCurrentIndex(index);
+          await Provider.of<PageControllerApp>(context, listen: false)
+              .showSheet();
         }
       },
       child: Consumer<PageControllerApp>(
@@ -77,6 +82,13 @@ class ItemPage extends StatelessWidget {
               Provider.of<PageControllerApp>(context, listen: false)
                   .currentIndex;
 
+          double progress =
+              Provider.of<PageControllerApp>(context, listen: false)
+                  .progress;
+
+          double spec = Provider.of<PageControllerApp>(context, listen: false)
+              .spec;
+
           bool hideCard;
           if (currentIndex != -1) {
             if (index == currentIndex) {
@@ -89,7 +101,7 @@ class ItemPage extends StatelessWidget {
           }
 
           return AnimatedOpacity(
-            duration: Duration(milliseconds: !hideCard ? 3000 : 10),
+            duration: Duration(milliseconds: 10),
             opacity: hideCard ? 0 : 1,
             child: Stack(
               alignment: Alignment.center,
@@ -102,8 +114,8 @@ class ItemPage extends StatelessWidget {
                       : Playback.PLAY_REVERSE,
                   builder: (context, animation) {
                     return Positioned(
-                      top:
-                          MediaQuery.of(context).size.height * animation['top'],
+                      top: MediaQuery.of(context).size.height *
+                                      animation['top'] - progress * 230,
                       height: MediaQuery.of(context).size.height * 0.55,
                       width: MediaQuery.of(context).size.width * 0.80,
                       child: Transform.rotate(
@@ -120,16 +132,16 @@ class ItemPage extends StatelessWidget {
                               return Transform.rotate(
                                 angle: animation['rotate'],
                                 child: Transform.scale(
-                                  child: Opacity(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          right: 0/*animation['padding_right']*/),
-                                      child: child,
+                                    child: Opacity(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            right:
+                                                0 /*animation['padding_right']*/),
+                                        child: child,
+                                      ),
+                                      opacity: animation['opacity'],
                                     ),
-                                    opacity: animation['opacity'],
-                                  ),
-                                  scale: animation['scale'],
-                                ),
+                                    scale: animation['scale']),
                               );
                             },
                           ),
@@ -188,11 +200,14 @@ class FrontCard extends Container {
                       children: <Widget>[
                         Text('Credit Card',
                             style: TextStyle(
-                                fontSize: 32, fontWeight: FontWeight.bold)),
+                                fontSize: 32 +
+                                    MediaQuery.of(context).size.width * 0.0025,
+                                fontWeight: FontWeight.bold)),
                         Image.network(
-                            'https://i.ya-webdesign.com/images/white-wifi-logo-png-6.png',
-                            width: 45,
-                            height: 45),
+                          'https://i.ya-webdesign.com/images/white-wifi-logo-png-6.png',
+                          width: MediaQuery.of(context).size.height * 0.045,
+                          height: MediaQuery.of(context).size.height * 0.045,
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -202,14 +217,16 @@ class FrontCard extends Container {
                       children: <Widget>[
                         Image.network(
                             'https://img.icons8.com/cotton/2x/sim-card-chip--v1.png',
-                            width: 70,
-                            height: 70),
+                            width: MediaQuery.of(context).size.height * 0.070,
+                            height: MediaQuery.of(context).size.height * 0.070),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.08,
                         ),
                         Text('1223 56655 22665 26263',
                             style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold))
+                                fontSize: 18 +
+                                    MediaQuery.of(context).size.width * 0.0025,
+                                fontWeight: FontWeight.bold))
                       ],
                     ),
                     SizedBox(
@@ -221,10 +238,17 @@ class FrontCard extends Container {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text('CARD HOLDER', style: TextStyle(fontSize: 12)),
+                            Text('CARD HOLDER',
+                                style: TextStyle(
+                                    fontSize: 12 *
+                                        MediaQuery.of(context).size.width *
+                                        0.0025)),
                             Text('Renato Mota',
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold)),
+                                    fontSize: 18 +
+                                        MediaQuery.of(context).size.width *
+                                            0.0025,
+                                    fontWeight: FontWeight.bold)),
                           ],
                         ),
                         Image.network(operadoraURL, width: 60, height: 60),
@@ -262,45 +286,55 @@ class BackCard extends Container {
             children: <Widget>[
               Container(
                 color: Colors.black38,
-                height: 60,
+                height: MediaQuery.of(context).size.height * 0.060,
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.01,
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 80),
+                padding: EdgeInsets.only(
+                  right: MediaQuery.of(context).size.width * 0.080,
+                ),
                 child: Container(
                   color: Colors.white,
-                  height: 60,
-                  width: 250,
+                  height: MediaQuery.of(context).size.height * 0.07,
+                  width: MediaQuery.of(context).size.width * 0.70,
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
+                      padding: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width * 0.080,
+                      ),
                       child: Text(
                         '2263 212',
-                        style: TextStyle(color: Colors.grey[800], fontSize: 21),
+                        style: TextStyle(
+                          color: Colors.grey[800],
+                          fontSize:
+                              21 + MediaQuery.of(context).size.width * 0.0025,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  SizedBox(
-                    width: MediaQuery.of(context).size.height * 0.07,
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.08,
-                  ),
-                  Text('1223 56655 22665 26263',
-                      style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: color,
-                          shadows: [
-                            Shadow(color: Colors.black38, offset: Offset(0, 3)),
-                          ]))
+                  Padding(
+                    padding: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width * 0.080,
+                    ),
+                    child: Text('1223 56655 22665 26263',
+                        style: TextStyle(
+                            fontSize:
+                                22 + MediaQuery.of(context).size.width * 0.0025,
+                            fontWeight: FontWeight.bold,
+                            color: color.withOpacity(0.6),
+                            shadows: [
+                              Shadow(
+                                  color: Colors.black38, offset: Offset(0, 2)),
+                            ])),
+                  )
                 ],
               ),
               SizedBox(
@@ -321,7 +355,9 @@ class BackCard extends Container {
                   Padding(
                     padding: const EdgeInsets.only(right: 20),
                     child: Text('Service Hotline / 0800 223 545',
-                        style: TextStyle(fontSize: 16)),
+                        style: TextStyle(
+                            fontSize: 16 +
+                                MediaQuery.of(context).size.width * 0.0010)),
                   ),
                   //Image.network(operadoraURL, width: 60, height: 60),
                 ],

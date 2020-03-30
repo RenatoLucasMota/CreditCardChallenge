@@ -6,7 +6,7 @@ class MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60,
+      height: MediaQuery.of(context).size.height * 0.08,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Row(
@@ -14,9 +14,11 @@ class MyAppBar extends StatelessWidget {
           children: <Widget>[
             IconButton(
               icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                 Provider.of<PageControllerApp>(context, listen: false)
-              .setCurrentIndex(-1);
+              onPressed: () async {
+                Provider.of<PageControllerApp>(context, listen: false)
+                    .setCurrentIndex(-1);
+                await Provider.of<PageControllerApp>(context, listen: false)
+                    .hideSheet();
               },
             ),
             Consumer<PageControllerApp>(
