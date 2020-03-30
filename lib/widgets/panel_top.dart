@@ -15,7 +15,7 @@ class PanelTop extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.only(top: 60),
+        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.12),
         child: Padding(
           padding: EdgeInsets.only(left: 24, right: 24, top: 12),
           child: Container(
@@ -28,7 +28,7 @@ class PanelTop extends StatelessWidget {
                   children: <Widget>[
                     Text('Bank Cards',
                         style: TextStyle(
-                          fontSize: 42 + MediaQuery.of(context).size.width * 0.001,
+                          fontSize: 38 + MediaQuery.of(context).size.width * 0.001,
                           fontWeight: FontWeight.bold,
                         )),
                     CircleAvatar(
@@ -48,7 +48,7 @@ class PanelTop extends StatelessWidget {
                     SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                     Text('\$2346.15',
                         style: TextStyle(
-                          fontSize: 32 + MediaQuery.of(context).size.width * 0.001,
+                          fontSize: 28 + MediaQuery.of(context).size.width * 0.001,
                           fontWeight: FontWeight.bold,
                         )),
                   ],

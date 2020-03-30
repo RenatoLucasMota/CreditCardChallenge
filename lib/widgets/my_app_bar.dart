@@ -5,12 +5,13 @@ import 'package:provider/provider.dart';
 class MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.08,
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.08 + MediaQuery.of(context).padding.top,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding: EdgeInsets.only(left: 12, right: 12, top: 40),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             IconButton(
               icon: Icon(Icons.arrow_back),

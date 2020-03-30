@@ -18,7 +18,7 @@ class PanelTopTwo extends StatelessWidget {
           child: AnimatedOpacity(
             opacity: notifier.currentIndex == -1 || spec >= 0.6 ? 0 : 1,
             child: Padding(
-              padding: const EdgeInsets.only(top: 60),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.12),
               child: Padding(
                 padding: EdgeInsets.only(left: 24, right: 24, top: 12),
                 child: Container(
@@ -29,7 +29,7 @@ class PanelTopTwo extends StatelessWidget {
                     children: <Widget>[
                       Text('Full Card',
                           style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold)),
+                              fontSize: 24 - MediaQuery.of(context).size.width * (notifier.progress * 0.05), fontWeight: FontWeight.bold)),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.03),
                       AnimatedPadding(
@@ -38,7 +38,7 @@ class PanelTopTwo extends StatelessWidget {
                           top: notifier.currentIndex != -1 ? 0 : 40,
                         ),
                         child: Text('Rotate the card to view the security code',
-                            style: TextStyle(fontSize: 14)),
+                            style: TextStyle(fontSize: 14 - MediaQuery.of(context).size.width * (notifier.progress * 0.05))),
                       ),
                     ],
                   ),

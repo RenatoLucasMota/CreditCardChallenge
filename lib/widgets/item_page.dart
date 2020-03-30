@@ -115,7 +115,8 @@ class ItemPage extends StatelessWidget {
                   builder: (context, animation) {
                     return Positioned(
                       top: MediaQuery.of(context).size.height *
-                                      animation['top'] - progress * 230,
+                                      animation['top'] - progress * MediaQuery.of(context).size.height * 0.42 +
+                                      MediaQuery.of(context).padding.top,
                       height: MediaQuery.of(context).size.height * 0.55,
                       width: MediaQuery.of(context).size.width * 0.80,
                       child: Transform.rotate(
@@ -141,7 +142,7 @@ class ItemPage extends StatelessWidget {
                                       ),
                                       opacity: animation['opacity'],
                                     ),
-                                    scale: animation['scale']),
+                                    scale: animation['scale'] - (progress * 0.6)),
                               );
                             },
                           ),
