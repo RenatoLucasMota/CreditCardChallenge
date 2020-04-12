@@ -1,19 +1,36 @@
-### Pokedex Flutter/MobX
+<h1 align="center"> Credit Card Challenge</h1>
 
-### Features
+</h1>
+<p align="center">
+   <a href="https://github.com/RenatoLucasMota">
+    </h1>Github</h1>
+  </a>
+   <a href="https://www.youtube.com/channel/UCd-vLa_qcKve3CsDFlYiygA">
+    </h1>Youtube</h1>
+  </a>
+ 
+</p>
 
-- Listagem de Pokemons
-- Tela de Detalhes do Pokemon (Detalhes, Status, Evoluções)
 
-### Dev Tools
-- App feito com gerência de estado utilizando MobX e com gerência de instancias utilizando a biblioteca GetIt.
+## 📱 Gif #
 
-# Screenshots
 
-![](https://raw.githubusercontent.com/RenatoLucasMota/PokeDex_MobX/master/Screenshot_1.png)
+![](https://github.com/RenatoLucasMota/CreditCardChallenge/blob/master/gif/gif1.gif?raw=true)
 
-![](https://raw.githubusercontent.com/RenatoLucasMota/PokeDex_MobX/master/Screenshot_3.png)
+![](https://github.com/RenatoLucasMota/CreditCardChallenge/blob/master/gif/gif2.gif?raw=true)
 
-![](https://raw.githubusercontent.com/RenatoLucasMota/PokeDex_MobX/master/Screenshot_4.png)
+## 🖥 Flutter Tutorial
+All Flutter Tutorials plus additional Code and shorter posts can be found on the (https://www.youtube.com/channel/UCd-vLa_qcKve3CsDFlYiygA). 
 
-![](https://raw.githubusercontent.com/RenatoLucasMota/PokeDex_MobX/master/Screenshot_5.png)
+## ⚙️ Built with Amazing Tools
+* [Flutter](https://flutter.dev/) - Beautiful native apps in record time.
+* [Android Studio](https://developer.android.com/studio/index.html/) - Tools for building Awesome apps on every type of Android device.
+* [Visual Studio Code](https://code.visualstudio.com/) - Code editing. Redefined.
+
+
+## 🤝 Show Some Support #
+If you liked the app give this repo a ⭐️ 
+
+
+## 🐞 Bugs/Requests #
+If you encounter any problems feel free to open an issue. If you feel the library is missing a feature, please raise a ticket on Github and I'll look into it. Pull request are also welcome.
